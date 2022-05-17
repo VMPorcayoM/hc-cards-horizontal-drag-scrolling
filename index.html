@@ -200,8 +200,10 @@
     const year = "2022";
     // Mes en que se están subiendo las imagenes a wordpress formato MM (Ya que la ubicación de las imagenes cambia dependiendo la fecha de subida)
     const month = "05"
+    //Nombre de la page y nombre del formato que tendran las imagenes ejemplo: "sn-experiences-evolution-1" en este caso evolution
+    const page = "evolution";
     /** Ejemplo de URL relativa de las iamgenes en wordpress: https://dev.handcloud.solutions/wp-content/uploads/${year}/${month}/servicenow-${i}.png **/
-  
+    
     
     // Array con titulos en ingles (Deben coincidir el numero de titulos con el número de imagenes y deben insertarse en el orden que se desee presentar igual que las imagenes) 
     const titlesEnglish=["","","", "",];
@@ -229,7 +231,7 @@
         <div class="card">
             <div id="front" >
                 <img class="hc" src="img/HC 1.png">
-                <img class="img" src="img/${i-1}.png">
+                <img class="img" src="https://dev.handcloud.solutions/wp-content/uploads/${year}/${month}/sn-experiences-${page}-${i}.png">
                 <p class="title">${titlesSpanish[i]}</p>
                 <p class="description">${descriptionSpanish[i]}</p>
                 <button class="btn-detail-front" id="flip-btn-back">Detalles</button>
