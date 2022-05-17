@@ -219,6 +219,8 @@
         "<li>Cumplimiento de las recomendaciones y políticas técnicas de la plataforma.</li><br><li>Definición de ajustes en el proceso para adecuarse a la operación actual del cliente.</li><br><li>Migraciones ágiles sobre implementaciones complejas que puedan generar impactos actualmente.</li>",
         "<li>Metodología comprobada para ejecución de migraciones.</li><br><li>Uso de pruebas automatizadas para optimizar el tiempo de ejecución.</li><br><li>Resolución de cualquier problema resultante del cambio de versión.</li><br><li>Minimiza el impacto a la operación durante las migraciones.</li><br><li>Coordinación de los usuarios de negocio para el correcto entendimiento de los impactos en el cambio de versión.</li><br>                    <li>Detección de posibles implementaciones basado en las nuevas funcionalidades disponibles con el cambio de versión.</li>",
         "<li>Entrenamientos especializados enfocados en la habilitación de usuarios.</li><br><li>Entrenamientos para el uso de módulos que no se encuentren en uso.</li><br><li>Entendimiento de las funcionalidades disponibles en la plataforma y el uso aplicado a la organización.</li>"];
+    //Posiciones de las cards que deben llevar el icono de HC
+    const posHCStars=[0,1];
 
     var bloqueCard = ``;
     // Determina el idioma de la página (true spanish false english)
@@ -228,7 +230,7 @@
         bloqueCard = `
         <div class="card">
             <div id="front" >
-                <img class="hc" src="img/HC 1.png">
+                ${posHCStars.includes(i) ? '<img class="hc" src="img/HC 1.png">':''}
                 <img class="img" src="img/${i+1}.png">
                 <p class="title">${titlesSpanish[i]}</p>
                 <p class="description">${descriptionSpanish[i]}</p>
