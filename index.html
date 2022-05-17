@@ -100,10 +100,6 @@
     //Posiciones de cards que deben llevar el log de HC en la esquina superior izq
     const posHCStars=[0,1];
 
-
-
-    var bloqueCard = ``;
-
     // Determina el idioma de la página (true spanish false english)
     // Crea todos los slides dependiendo el número de imagenes que se almacenen
     for (var i = 0; i < noImagenesAlmacenadas; i++) {
@@ -111,7 +107,7 @@
         bloqueCard = `
         <div class="card">
             <div id="front" >
-                ${posHCStars.includes(i) ? '<img class="hc" src="https://dev.handcloud.solutions/wp-content/uploads/${year}/${month}/HC 1.png">':''}
+                ${posHCStars.includes(i) ? `<img class="hc" src="https://dev.handcloud.solutions/wp-content/uploads/${year}/${month}/HC-1.png">` : ''}
                 <img class="img" src="https://dev.handcloud.solutions/wp-content/uploads/${year}/${month}/sn-experiences-${page}-${i+1}.png">
                 <p class="title">${titlesSpanish[i]}</p>
                 <p class="description">${descriptionSpanish[i]}</p>
