@@ -9,9 +9,17 @@
     <div class="media-scroller" id="slider">
         
     </div>
+    <ul class="listslider" id="listslider">
+        
+    </ul>
 </body>
 </html>
 <style>
+   @media screen and (min-width: 699px) {
+        .listslider{
+            visibility: hidden;
+        }
+    }
     .selector{
         font-family: 'Montserrat';
         color: #000;
@@ -19,8 +27,7 @@
     }
  
     #back ul li{
-        color: #FFFF;
-        
+        color: #FFFF;      
     }
     #back ul{
         position: absolute;
@@ -141,10 +148,46 @@
         border-radius: 10px;
         transform: rotateY(180deg);
     }
+    .listslider{
+    position: absolute;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      z-index: 2;     
+  }
+  .listslider li {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  .listslider li a {    
+    background: #3c5654;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: block;
+  } 
+  .listslider {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      flex-direction: row;
+      justify-content: center;
+    }
     
 
 </style>
 <script>
+    
+    const listSlid= document.querySelector(".listslider");
+    
     //Funcion de click en el boton que gira la card con estilos css
    document.addEventListener('DOMContentLoaded', function(event) {
         var front_btns = document.getElementsByClassName('btn-detail-front');
@@ -228,10 +271,17 @@
     const posHCStars=[0,1];
 
     var bloqueCard = ``;
+    var bloqueList= ``;
     // Determina el idioma de la página (true spanish false english)
     // Crea todos los slides dependiendo el número de imagenes que se almacenen
     for (var i = 0; i < noImagenesAlmacenadas; i++) {
-        
+        i == 1 ? 
+        bloqueList =`
+        <li><a itlist='itList_${i}' href="#" class="item-select-slid"></a></li>
+        ` : bloqueList =`
+        <li><a itlist='itList_${i}' href="#"></a></li>
+        ` ; 
+
         bloqueCard = `
         <div class="card">
             <div id="front" >
@@ -249,9 +299,60 @@
             </div>
         </div>
             `;
+            listSlid.innerHTML += bloqueList;
             slider.innerHTML += bloqueCard;
             
 
     }
+    
+
+    //Para ubicarse sobre la card al dar click en los puntos
+    if (document.querySelector(".listslider")) {
+        var link = document.querySelectorAll(".listslider li a");
+        link.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+            var item = this.getAttribute("itlist");
+            var arrItem = item.split("_");
+            fntExecuteSlide(arrItem[1], false);
+            return false;
+        });
+        });
+    }
+
+    function fntExecuteSlide(side) {
+    var parentTarget = document.getElementById("listslider");
+    var elements = parentTarget.getElementsByTagName("li");
+    var curElement, nextElement;
+
+    for (var i = 0; i < elements.length; i++) {
+      var x = i;
+      if (elements[x].style.opacity == 1) {
+        curElement = x;
+        console.log(curElement);
+        break;
+      }
+    }
+    if (side == "prev" || side == "next") {
+      if (side == "prev") {
+        nextElement = curElement == 0 ? elements.length - 1 : curElement - 1;
+      } else {
+        nextElement = curElement == elements.length - 1 ? 0 : curElement + 1;
+      }
+    } else {
+      nextElement = side;
+      side = curElement > nextElement ? "prev" : "next";
+    }
+    //Resalta los puntos de desplazamiento
+    var elementSel = document
+      .getElementsByClassName("listslider")[0]
+      .getElementsByTagName("a");
+    elementSel[curElement].classList.remove("item-select-slid");
+    elementSel[nextElement].classList.add("item-select-slid");
+    elements[curElement].style.opacity = 0;
+    elements[curElement].style.zIndex = 0;
+    elements[nextElement].style.opacity = 1;
+    elements[nextElement].style.zIndex = 1;
+  }
 
 </script>
