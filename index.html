@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=<div class="media-scroller snaps-inline">
+    <meta name="viewport" class="media-scroller snaps-inline">
 </head>
 <body class="selector">
     <div class="media-scroller" id="slider">
         
     </div>
-    <ul class="listslider" id="listslider">
+    <!-- <ul class="listslider" id="listslider">
         
-    </ul>
+    </ul> -->
 </body>
 </html>
 <style>
-   @media screen and (min-width: 699px) {
+   /* @media screen and (min-width: 699px) {
         .listslider{
             visibility: hidden;
         }
-    }
+    } */
     .selector{
         font-family: 'Montserrat';
         color: #000;
@@ -70,6 +70,20 @@
         border: none;
         background:none;
     }
+    .btn-detail-front:hover{
+        font-size:16px;
+        color:#EF3F48;
+        outline:none;
+        border: none;
+        background:none;
+    }
+    .btn-detail-back:hover{
+        font-size:16px;
+        color:#EF3F48;
+        outline:none;
+        border: none;
+        background:none;
+    }
     .title{
         position: relative;
         font-weight: bold;
@@ -97,7 +111,8 @@
         cursor: -webkit-grabbing;
         padding-top: 10px;
         padding-bottom: 10px;
-        
+        margin-right: 0px;
+        padding-right: 0px;
     }
 
     .card{
@@ -148,7 +163,7 @@
         border-radius: 10px;
         transform: rotateY(180deg);
     }
-    .listslider{
+    /* .listslider{
     position: absolute;
       display: -webkit-flex;
       display: -moz-flex;
@@ -165,7 +180,8 @@
     width: 10px;
     height: 10px;
     cursor: pointer;
-    margin: 0 5px;
+    margin: 0 5px; 
+    
   }
   .listslider li a {    
     background: #3c5654;
@@ -181,12 +197,15 @@
       flex-direction: row;
       justify-content: center;
     }
+    .item-select-slid {
+    background: #84b7a2 !important;
+    } */
     
 
 </style>
 <script>
     
-    const listSlid= document.querySelector(".listslider");
+    // const listSlid= document.querySelector(".listslider");
     
     //Funcion de click en el boton que gira la card con estilos css
    document.addEventListener('DOMContentLoaded', function(event) {
@@ -275,12 +294,12 @@
     // Determina el idioma de la página (true spanish false english)
     // Crea todos los slides dependiendo el número de imagenes que se almacenen
     for (var i = 0; i < noImagenesAlmacenadas; i++) {
-        i == 1 ? 
-        bloqueList =`
-        <li><a itlist='itList_${i}' href="#" class="item-select-slid"></a></li>
-        ` : bloqueList =`
-        <li><a itlist='itList_${i}' href="#"></a></li>
-        ` ; 
+        // i == 0 ? 
+        // bloqueList =`
+        // <li><a itlist='itList_${i}' href="#" class="item-select-slid"></a></li>
+        // ` : bloqueList =`
+        // <li><a itlist='itList_${i}' href="#"></a></li>
+        // ` ; 
 
         bloqueCard = `
         <div class="card">
@@ -299,60 +318,50 @@
             </div>
         </div>
             `;
-            listSlid.innerHTML += bloqueList;
+            // listSlid.innerHTML += bloqueList;
             slider.innerHTML += bloqueCard;
             
 
     }
     
 
-    //Para ubicarse sobre la card al dar click en los puntos
-    if (document.querySelector(".listslider")) {
-        var link = document.querySelectorAll(".listslider li a");
-        link.forEach(function (link) {
-        link.addEventListener("click", function (e) {
-            e.preventDefault();
-            var item = this.getAttribute("itlist");
-            var arrItem = item.split("_");
-            fntExecuteSlide(arrItem[1], false);
-            return false;
-        });
-        });
-    }
+    // //Para ubicarse sobre la card al dar click en los puntos
+    // if (document.querySelector(".listslider")) {
+    //     var link = document.querySelectorAll(".listslider li a");
+    //     link.forEach(function (link) {
+    //         link.addEventListener("click", function (e) {
+    //             e.preventDefault();
+    //             document.querySelector('.card').animate({
+    //                 scrollLeft: '+=100'
+    //             }, 300, 'swing');
+    //             var item = this.getAttribute("itlist");
+    //             var arrItem = item.split("_");
+    //             fntExecuteSlide(arrItem[1], false);
+    //             return false;
+    //         });
+    //     });
+    // }
 
-    function fntExecuteSlide(side) {
-    var parentTarget = document.getElementById("listslider");
-    var elements = parentTarget.getElementsByTagName("li");
-    var curElement, nextElement;
+    // function fntExecuteSlide(side) {
+    //     var parentTarget = document.getElementById("listslider");
+    //     var elements = parentTarget.getElementsByTagName("li");
+    //     var curElement, nextElement=side;
 
-    for (var i = 0; i < elements.length; i++) {
-      var x = i;
-      if (elements[x].style.opacity == 1) {
-        curElement = x;
-        console.log(curElement);
-        break;
-      }
-    }
-    if (side == "prev" || side == "next") {
-      if (side == "prev") {
-        nextElement = curElement == 0 ? elements.length - 1 : curElement - 1;
-      } else {
-        nextElement = curElement == elements.length - 1 ? 0 : curElement + 1;
-      }
-    } else {
-      nextElement = side;
-      side = curElement > nextElement ? "prev" : "next";
-    }
-    //Resalta los puntos de desplazamiento
-    var elementSel = document
-      .getElementsByClassName("listslider")[0]
-      .getElementsByTagName("a");
-    elementSel[curElement].classList.remove("item-select-slid");
-    elementSel[nextElement].classList.add("item-select-slid");
-    elements[curElement].style.opacity = 0;
-    elements[curElement].style.zIndex = 0;
-    elements[nextElement].style.opacity = 1;
-    elements[nextElement].style.zIndex = 1;
-  }
+
+    
+    
+
+    //     for (var i = 0; i < elements.length; i++) {
+    //     if(elements[i].querySelector('.item-select-slid')){
+    //         curElement = i;
+    //         elements[i].querySelector('.item-select-slid').classList.remove("item-select-slid");
+    //         elements[side].firstChild.classList.add("item-select-slid");
+    //         document.querySelector('.card').getBoundingClientRect().left=-30;
+    //         console.log(document.querySelector('.card').getBoundingClientRect().left);
+            
+    //         break;
+    //         }
+    //     }
+    // }
 
 </script>
