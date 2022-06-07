@@ -103,10 +103,22 @@
         margin-top: 97px;
         width: 26%;
     }
+    .media-scroller::-webkit-scrollbar {
+        width: 6px;               /* width of the entire scrollbar */
+        
+    }
+    .media-scroller::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 8px;
+    }
+    
+    .media-scroller::-webkit-scrollbar:horizontal {
+        height: 12px;        
+    }
     .media-scroller {
         display: grid;
         grid-auto-flow: column;
-        overflow-x: hidden;
+        overflow-x: auto;
         cursor: grabbing;
         cursor: -webkit-grabbing;
         padding-top: 10px;
