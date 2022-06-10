@@ -60,6 +60,10 @@
         const walk = (x - startX) * 2; //scroll-fast
         slider.scrollLeft = scrollLeft - walk;
     });
+
+    // Determina el idioma de la página (true spanish false english)
+    let language = getLanguage();
+
     var noImagenesAlmacenadas = 3;
     
     const year = "2022";
@@ -67,19 +71,23 @@
     const month = "05"
     
     const page = "transformation";
-    const titlesEnglish=["",""];
+    const titlesEnglish=["Implementation Services","Business Solutions","Change Management"];
     
     const titlesSpanish=["Servicios de Implementación","Soluciones de Negocio", "Change Managment"];
     
-    const descriptionEnglish=["",""];
+    const descriptionEnglish=["Implementation of projects for digitization and automation based on ServiceNow solutions.",
+    "Transition and/or integrate legacy solutions and home-built applications to the ServiceNow platform.",
+    "Projects for change management and adoption of new technologies."];
     
     const descriptionSpanish=["Implementación de proyectos para digitalización y automatización de procesos de negocio basado en las soluciones de ServiceNow.","Transición y/o integración de soluciones legadas y aplicaciones construidas en casa a la plataforma ServiceNow.","Proyectos para la gestión del cambio y adopción de nuevas tecnologías dentro de la organización."];
     
-    const descriptionBackEnglish=["",""];
+    const descriptionBackEnglish=["<li>Customized project executions.</li><br><li>Implementation methodologies provide visibility to achieve objectives.</li><br><li>Recommendations based on experiences and market feedback.</li><br><li>Learn more working with experienced implementation teams.</li>"
+    ,"<li>Implementation of technologies such as:</li><br><li>-Automation flows.</li><li>-Virtual customer service.</li><li>-Service portals and KPI dashboards.</li><li>-Mobile apps.</li><br><li>Design and development of business processes in digital applications.</li>",
+    "<li>Proven methodologies for agile adoption of new technologies.</li><br><li>Communication campaigns  to facilitate user understanding.</li><br><li>Stakeholders and change champions within the organization are identified.</li>"];
     
     const descriptionBackSpanish=["<li>Proyectos a la medida.</li><br><li>Metodologías de implementación que dan visibilidad del cumplimiento de objetivos.</li><br><li>Acompañamiento en la definición de procesos.</li><br><li>Recomendaciones con base a experiencias y referencias del mercado.</li><br><li>Experiencias en la interacción con los equipos de implementación y la plataforma.</li>",
         "<li>Uso de tecnologías como:</li><br><li>-Flujos de automatización.</li><li>-Agentes virtuales.</li><li>-Portales de servicio y tableros de KPI.</li><li>-Aplicaciones móviles.</li><br><li>Diseño y desarrollo de procesos de negocio en aplicaciones digitales.</li>",
-        "<li>Metodologías probadas para ágil adopción de nuevas tecnologías.</li><br><li>Campañas de comunicación que facilitan la comprensión del usuario.</li><br><li>Se identifican los stakeholders y change champions dentro de la organización.</li><br><li>Entendimiento del impacto positivo de los cambios y la innovación.</li>"   ];
+        "<li>Metodologías probadas para ágil adopción de nuevas tecnologías.</li><br><li>Campañas de comunicación que facilitan la comprensión del usuario.</li><br><li>Se identifican los stakeholders y change champions dentro de la organización.</li><br><li>Entendimiento del impacto positivo de los cambios y la innovación.</li>"];
 
 
     for (var i = 0; i < noImagenesAlmacenadas; i++) {
@@ -88,20 +96,30 @@
         <div class="card">
             <div id="front" >                
                 <img class="img" src="https://dev.handcloud.solutions/wp-content/uploads/${year}/${month}/sn-experiences-${page}-${i+1}.png">
-                <p class="title">${titlesSpanish[i]}</p>
-                <p class="description">${descriptionSpanish[i]}</p>
-                <button class="btn-detail-front" id="flip-btn-back">Detalles</button>
+                <p class="title">${language ? titlesSpanish[i] : titlesEnglish[i]}</p>
+                <p class="description">${language ? descriptionSpanish[i] : descriptionEnglish[i]}</p>
+                <button class="btn-detail-front" id="flip-btn-back">${language ? 'Detalles' : 'Features'}</button>
             </div>
             <div id="back">
                 <ul>
-                    ${descriptionBackSpanish[i]}
+                    ${language ? descriptionBackSpanish[i] : descriptionBackEnglish[i]}
                 </ul>
-                <button class="btn-detail-back" id="flip-btn-front">Volver</button>
+                <button class="btn-detail-back" id="flip-btn-front">${language ? 'Volver' : 'Go back'}</button>
             </div>
         </div>
             `;
             slider.innerHTML += bloqueCard;
 
     }
+
+
+    //Identifica idioma (Devuelve true si es en Español y false si es en Inglés)
+  function getLanguage(){
+    var regex=/\/es\//;
+    if(regex.exec(window.location.href) != null){
+      return true;
+    }
+    return false;
+  } 
 
 </script>
