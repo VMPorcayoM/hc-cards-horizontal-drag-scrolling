@@ -60,42 +60,47 @@
         const walk = (x - startX) * 2; //scroll-fast
         slider.scrollLeft = scrollLeft - walk;
     });
+    // Determina el idioma de la página (true spanish false english)
+    let language = getLanguage();
+
+
     var noImagenesAlmacenadas = 2;
-    
+
     const year = "2022";
     
     const month = "05"
     
     const page = "evolution";
-    const titlesEnglish=["",""];
+    const titlesEnglish=["Staffing","Requirements"];
     
     const titlesSpanish=["Staffing","Requerimientos"];
     
-    const descriptionEnglish=["",""];
+    const descriptionEnglish=["","Rapid response team dedicated toward developing customized business solutions and deliverables under tight deadlines."];
     
     const descriptionSpanish=["El servicio de staffing permite incrementar la capacidad de generar soluciones disponibles al habilitar roles especializados en desarrollo, análisis, aseguramiento de calidad o seguimiento de implementaciones sobre la plataforma de ServiceNow, esto diseñado a la medida de la necesidad del negocio sobre el nivel de involucramiento o disponibilidad requerida por cada rol o la generación de grupos de trabajo que se involucren la generación de soluciones.","Implementaciones rápidas para soluciones de negocio que no requieran la definición de un proyecto de gran escala. <br><br>Ejecución ágil y entregables en periodos de tiempo corto."];
     
-    const descriptionBackEnglish=["",""];
+    const descriptionBackEnglish=["<li>Increases our ability to generate and execute bespoke solutions.</li><br><li>Specialized roles in development, analysis, quality assurance, or monitoring of implementations on the ServiceNow platform.</li><br><li>Design projects tailored to the needs of your business.</li><br><li>Working groups dedicated toward generating specific workflow solutions.</li>",
+    "<li>Current products.</li><br><li>New services for end users.</li><br><li>Implementation of specific project functions.</li>"];
     
     const descriptionBackSpanish=["<li>Incrementa la capacidad de generar soluciones disponibles.</li><br><li>Roles especializados en desarrollo, análisis, aseguramiento de calidad o seguimiento de implementaciones sobre la plataforma de ServiceNow.</li><br><li>Diseño a la medida de la necesidad del negocio sobre el nivel de involucramiento o disponibilidad requerida por cada rol.</li><br><li>Generación de grupos de trabajo que se involucren en la creación de soluciones.</li>",
         "<li>Productos actualmente implementados.</li><br><li>Nuevos servicios para usuarios finales.</li><br><li>Implementación de funcionalidades específicas que forman parte de un proyecto.</li>"];
 
 
-    for (var i = 0; i < noImagenesAlmacenadas; i++) {
+        for (var i = 0; i < noImagenesAlmacenadas; i++) {
         
         bloqueCard = `
         <div class="card">
             <div id="front" >                
                 <img class="img" src="https://dev.handcloud.solutions/wp-content/uploads/${year}/${month}/sn-experiences-${page}-${i+1}.png">
-                <p class="title">${titlesSpanish[i]}</p>
-                <p class="description">${descriptionSpanish[i]}</p>
-                <button class="btn-detail-front" id="flip-btn-back">Detalles</button>
+                <p class="title">${language ? titlesSpanish[i] : titlesEnglish[i]}</p>
+                <p class="description">${language ? descriptionSpanish[i] : descriptionEnglish[i]}</p>
+                <button class="btn-detail-front" id="flip-btn-back">${language ? 'Detalles' : 'Features'}</button>
             </div>
             <div id="back">
                 <ul>
-                    ${descriptionBackSpanish[i]}
+                    ${language ? descriptionBackSpanish[i] : descriptionBackEnglish[i]}
                 </ul>
-                <button class="btn-detail-back" id="flip-btn-front">Volver</button>
+                <button class="btn-detail-back" id="flip-btn-front">${language ? 'Volver' : 'Go back'}</button>
             </div>
         </div>
             `;
@@ -103,4 +108,13 @@
 
     }
 
+
+    //Identifica idioma (Devuelve true si es en Español y false si es en Inglés)
+  function getLanguage(){
+    var regex=/\/es\//;
+    if(regex.exec(window.location.href) != null){
+      return true;
+    }
+    return false;
+  } 
 </script>
