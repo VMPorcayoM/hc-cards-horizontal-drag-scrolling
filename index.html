@@ -109,12 +109,18 @@
     }
 
 
-    //Identifica idioma (Devuelve true si es en Español y false si es en Inglés)
+   //Identifica idioma (Devuelve true si es en Español y false si es en Inglés)
   function getLanguage(){
     var regex=/\/es\//;
     if(regex.exec(window.location.href) != null){
       return true;
     }
     return false;
-  } 
+  }
+  //Si el lenguaje es inglés
+  if(!getLanguage()){
+    for (let i = 0; i < noImagenesAlmacenadas; i++) {
+      document.getElementById("btnSlider"+i).innerHTML = "See more";
+    }
+  }
 </script>
